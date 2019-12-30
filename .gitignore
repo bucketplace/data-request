@@ -1,0 +1,10 @@
+/.gradle
+/.idea
+/out
+/build
+*.iml
+*.ipr
+*.iws
+/src/enums/
+/src/secrets/
+/db/

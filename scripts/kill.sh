@@ -1,0 +1,1 @@
+kill -9 $(ps x | grep "data-request" | grep -v grep | grep -oE "[0-9]+" | head -n 1)
