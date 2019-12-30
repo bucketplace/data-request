@@ -1,0 +1,1 @@
+* * * * * /home/bsscco/data-request/chkproc.sh > /home/bsscco/data-request/crontab-chkproc.log 2>&1
