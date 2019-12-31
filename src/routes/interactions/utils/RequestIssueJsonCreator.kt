@@ -31,7 +31,7 @@ class RequestIssueJsonCreator(
 
     init {
         val submissionValues = requestBody.view.state.values
-        hopeResponsiblePerson = submissionValues.hopeResponsiblePerson.action.selectedOption!!.value
+        hopeResponsiblePerson = submissionValues.hopeResponsiblePerson.action.selectedOption?.value ?: "-"
         hopeDueDate = submissionValues.hopeDueDate.action.selectedDate!!
         requestType = RequestType.get(submissionValues.requestType.action.selectedOption!!.value)
         requestObject = submissionValues.requestObject.action.value!!
@@ -65,9 +65,8 @@ class RequestIssueJsonCreator(
     """.toJson()
 
     private fun createSummary(): String {
-        return "[${aggregationPlatform}]"
-            .plus(" ${requestDescription.convertUtf8mb4()}")
-            .let { it.replace("\n", " ")}
+        return requestDescription.convertUtf8mb4()
+            .let { it.replace("\n", " ") }
             .let { it.substring(0, min(it.length, 100)) }
     }
 

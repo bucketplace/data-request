@@ -1,9 +1,7 @@
 package routes.interactions.utils
 
-import db.members.Member
 import db.members.MemberDao
 import routes.interactions.requests.InteractionRequestBody
-import routes.interactions.requests.InteractionRequestBody.View.State.Values
 import secrets.JiraSecrets
 import utils.SlackJsonCreator.createMarkdownText
 import utils.escapeNewLine
@@ -35,7 +33,7 @@ class RequestCreatedMessageJsonCreator(
             StringBuffer().apply {
                 append(createField("요청자", "<@${interactionRequestBody.user.id}>"))
                 append(createField("요청 날짜", SimpleDateFormat("YYYY-MM-dd").format(Date())))
-                append(createField("희망 담당자", "<@${getHopeResponsiblePersonMemberId()}>"))
+                append(createField("희망 담당자", getHopeResponsiblePerson()))
                 append(createField("희망 완료일", submissionValues.hopeDueDate.action.selectedDate!!))
                 append(createField("요청 유형", submissionValues.requestType.action.selectedOption!!.value))
                 append(createField("요청 배경/목적", submissionValues.requestObject.action.value!!))
@@ -56,8 +54,10 @@ class RequestCreatedMessageJsonCreator(
         """
     }
 
-    private fun getHopeResponsiblePersonMemberId(): String {
-        return MemberDao().getMemberByNickname(interactionRequestBody.view.state.values.hopeResponsiblePerson.action.selectedOption!!.value).id!!
+    private fun getHopeResponsiblePerson(): String {
+        return interactionRequestBody.view.state.values.hopeResponsiblePerson.action.selectedOption
+            ?.let { "<@${MemberDao().getMemberByNickname(it.value).id!!}>" }
+            ?: "-"
     }
 
     private fun createField(label: String, text: String) = "\n*$label*\n$text"
