@@ -36,8 +36,8 @@ class RequestCreatedMessageJsonCreator(
                 append(createField("희망 담당자", getHopeResponsiblePerson()))
                 append(createField("희망 완료일", submissionValues.hopeDueDate.action.selectedDate!!))
                 append(createField("요청 유형", submissionValues.requestType.action.selectedOption!!.value))
-                append(createField("요청 배경/목적", submissionValues.requestObject.action.value!!))
-                append(createField("요청 사항", submissionValues.requestDescription.action.value!!))
+                append(createField("요청 제목", submissionValues.requestSubject.action.value!!))
+                append(createField("요청 상세", submissionValues.requestDescription.action.value!!))
                 append(
                     createField(
                         "집계 기간",
@@ -45,7 +45,7 @@ class RequestCreatedMessageJsonCreator(
                     )
                 )
                 append(createField("집계 기간 단위", submissionValues.aggregationPeriodUnit.action.selectedOption!!.value))
-                append(createField("플랫폼", submissionValues.aggregationPlatform.action.selectedOptions!!.joinToString { it.value }))
+                append(createField("집계 플랫폼", submissionValues.aggregationPlatform.action.selectedOptions!!.joinToString { it.value }))
                 append(createField("지라 링크", getIssueUrl(issueKey)))
             }.toString()
                 .escapeNewLine()

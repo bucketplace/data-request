@@ -21,7 +21,7 @@ class RequestIssueJsonCreator(
     private val hopeResponsiblePerson: String
     private val hopeDueDate: String
     private val requestType: RequestType
-    private val requestObject: String
+    private val requestSubject: String
     private val requestDescription: String
     private val aggregaionPeriodStart: String
     private val aggregaionPeriodEnd: String
@@ -34,7 +34,7 @@ class RequestIssueJsonCreator(
         hopeResponsiblePerson = submissionValues.hopeResponsiblePerson.action.selectedOption?.value ?: "-"
         hopeDueDate = submissionValues.hopeDueDate.action.selectedDate!!
         requestType = RequestType.get(submissionValues.requestType.action.selectedOption!!.value)
-        requestObject = submissionValues.requestObject.action.value!!
+        requestSubject = submissionValues.requestSubject.action.value!!
         requestDescription = submissionValues.requestDescription.action.value!!
         aggregaionPeriodStart = submissionValues.aggregationPeriodStart.action.selectedDate!!
         aggregaionPeriodEnd = submissionValues.aggregationPeriodEnd.action.selectedDate!!
@@ -65,14 +65,14 @@ class RequestIssueJsonCreator(
     """.toJson()
 
     private fun createSummary(): String {
-        return requestDescription.convertUtf8mb4()
+        return requestSubject.convertUtf8mb4()
             .let { it.replace("\n", " ") }
             .let { it.substring(0, min(it.length, 100)) }
     }
 
     fun createDescription(): String {
         return buildString {
-            append("\nh2. 요청 배경/목적\n\n$requestObject")
+            append("\nh2. 요청 제목\n\n$requestSubject")
             append("\nh2. 요청 상세\n\n$requestDescription")
             append("\nh2. 집계 기간\n\n$aggregaionPeriodStart ~ $aggregaionPeriodEnd")
             append("\nh2. 집계 기준 단위\n\n$aggregaionPeriodUnit")

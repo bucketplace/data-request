@@ -32,7 +32,7 @@ object RequestFormModalJsonCreator {
                 ${createHopeResponsiblePersonSelectBlock()},
                 ${createHopeDueDatePickerBlock()},
                 ${createRequestTypeSelectBlock()},
-                ${createRequestObjectInputBlock()},
+                ${createRequestSubjectInputBlock()},
                 ${createRequestDescriptionInputBlock()},
                 ${createAggregationPeriodStartDatePickerBlock()},
                 ${createAggregationPeriodEndDatePickerBlock()},
@@ -98,12 +98,12 @@ object RequestFormModalJsonCreator {
             .toString()
     }
 
-    private fun createRequestObjectInputBlock(): String {
+    private fun createRequestSubjectInputBlock(): String {
         return createInputBlock(
-            blockId = BlockId.REQUEST_OBJECT.name.toLowerCase(),
-            label = createPlainText("요청 배경/목적"),
+            blockId = BlockId.REQUEST_SUBJECT.name.toLowerCase(),
+            label = createPlainText("요청 제목"),
             placeholder = createPlainText(" "),
-            hint = createPlainText("사용하려는 목적 (요청 상세에 불가능한 부분이 있을때 목적에 맞는 우회방법으로 처리할 수 있음)"),
+            hint = createPlainText(" "),
             optional = false
         )
     }
@@ -113,7 +113,7 @@ object RequestFormModalJsonCreator {
             blockId = BlockId.REQUEST_DESCRIPTION.name.toLowerCase(),
             label = createPlainText("요청 상세"),
             placeholder = createPlainText(" "),
-            hint = createPlainText("요청 내용 가급적 자세히 ( ex.원하는 항목을 유저 아이디, 상품번호, 매출 등과 같이 원하는 항목 명시 하고 비율인 경우 분자 분모 까지 명시 )"),
+            hint = createPlainText("요청의 배경/목적과 함께 요청 내용 가급적 자세히 기재 ( ex. 유저 아이디, 매출과 같이 원하는 항목을 명시 하고 비율인 경우 분자 분모 명시 )"),
             optional = false,
             multiline = true
         )

@@ -20,7 +20,7 @@ data class InteractionRequestBody(
                 val hopeResponsiblePerson: SelectValue,
                 val hopeDueDate: DatePickerValue,
                 val requestType: SelectValue,
-                val requestObject: TextValue,
+                val requestSubject: TextValue,
                 val requestDescription: TextValue,
                 val aggregationPeriodStart: DatePickerValue,
                 val aggregationPeriodEnd: DatePickerValue,
